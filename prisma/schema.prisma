@@ -17,6 +17,7 @@ model User {
   nickname  String? @db.VarChar(45)
   createdAt DateTime @default(now()) @map("created_at")
 
+  posts Post[]
   likes Like[]
 
   @@map("users")
@@ -38,6 +39,9 @@ model Post {
   id Int @id @default(autoincrement())
   title String @db.VarChar(100)
   link String @db.VarChar(300)
+  userId Int? @map("user_id")
+
+  users User? @relation(fields: [userId], references: [id])
 
   likes Like[]
 

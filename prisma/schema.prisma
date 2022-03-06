@@ -12,6 +12,21 @@ datasource db {
 
 model User {
   id    Int     @id @default(autoincrement())
-  email String  @unique
+  email String  @unique @db.VarChar(200)
+  password String @db.VarChar(80)
   nickname  String? @db.VarChar(45)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  likes Like[]
+
+  @@map("users")
+}
+
+model Like {
+  id Int @id @default(autoincrement())
+  userId Int? @map("user_id")
+  postId Int? @map("project_id")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  users User? @relation(fields: [userId], references: [id])
 }

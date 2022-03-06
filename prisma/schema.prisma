@@ -29,4 +29,17 @@ model Like {
   createdAt DateTime @default(now()) @map("created_at")
 
   users User? @relation(fields: [userId], references: [id])
+  posts Post? @relation(fields: [postId], references: [id])
+
+  @@map("likes")
+}
+
+model Post {
+  id Int @id @default(autoincrement())
+  title String @db.VarChar(100)
+  link String @db.VarChar(300)
+
+  likes Like[]
+
+  @@map("posts")
 }

@@ -29,7 +29,7 @@ const logIn = async (email, password) => {
   const userInfo = await UserDao.findUserByEmail(email);
   let err;
 
-  if (userInfo === null) {
+  if (!userInfo.includes(email)) {
     err = new Error('INVALID_USER');
     err.statusCode = 400;
     throw err;

@@ -7,15 +7,14 @@ const createUser = async (email, hashedPw, nickname) => {
 };
 
 const findUserByEmail = async (email) => {
-  // console.log('email', email)
-  // return await prisma.$queryRaw`
-  //   SELECT email FROM users WHERE email = ${email}
-  // `;
-  return await prisma.user.findUnique({
-    where: {
-      email,
-    },
-  });
+  return await prisma.$queryRaw`
+    SELECT email FROM users WHERE email = ${email}
+  `;
+  // return await prisma.user.findUnique({
+  //   where: {
+  //     email,
+  //   },
+  // });
 };
 
 const findUserByNickname = async (nickname) => {

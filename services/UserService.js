@@ -12,11 +12,12 @@ const signUp = async (email, password, nickname) => {
   const existingUserByEmail = await UserDao.findUserByEmail(email);
   const existingUserByNickname = await UserDao.findUserByNickname(nickname);
 
-  if (existingUserByEmail) {
+  if (existingUserByEmail.includes(email)) {
+    console.log('?', existingUserByEmail);
     const error = new Error('EMAIL_ALREADY_IN_USE_EMAIL');
     error.statusCode = 409;
     throw error;
-  } else if (existingUserByNickname) {
+  } else if (existingUserByNickname.includes(nickname)) {
     const error = new Error('EMAIL_ALREADY_IN_USE_NICKNAME');
     error.statusCode = 409;
     throw error;
